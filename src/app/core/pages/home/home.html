@@ -1,0 +1,359 @@
+<div>
+  <section
+    class="hero-banner text-white text-center py-5"
+    style="
+      background:
+        linear-gradient(rgba(11, 37, 69, 0.82), rgba(13, 71, 161, 0.86)),
+        url('/images/hero-bus.jpg') center/cover no-repeat;
+      min-height: 360px;
+    "
+  >
+    <div class="hero-bg-overlay"></div>
+    <div class="container position-relative py-4">
+      <span class="badge bg-warning text-dark mb-3 px-3 py-2">
+        <i class="bi bi-patch-check-fill me-1"></i>
+        100% Trusted · 500,000+ Happy Passengers
+      </span>
+      <h1 class="fw-bold display-5 mb-3">
+        Travel Across Bangladesh,
+        <span class="text-warning">Comfortably</span>
+      </h1>
+      <p class="lead text-white-50 mb-0 mx-auto" style="max-width: 640px">
+        Book bus tickets from 100+ reputable operators across Dhaka, Chattogram, Cox's Bazar, Sylhet
+        &amp; more. Choose your seat, pay securely online and travel worry-free.
+      </p>
+
+      <div class="d-flex gap-4 justify-content-center flex-wrap mt-4">
+        <div>
+          <i class="bi bi-bus-front fs-4 text-warning"></i>
+          <div class="fw-bold">100+</div>
+          <small class="text-white-50">Operators</small>
+        </div>
+
+        <div>
+          <i class="bi bi-map fs-4 text-warning"></i>
+          <div class="fw-bold">250+</div>
+          <small class="text-white-50">Routes</small>
+        </div>
+
+        <div>
+          <i class="bi bi-people fs-4 text-warning"></i>
+          <div class="fw-bold">10K+</div>
+          <small class="text-white-50">Daily Passengers</small>
+        </div>
+
+        <div>
+          <i class="bi bi-geo-alt fs-4 text-warning"></i>
+          <div class="fw-bold">50+</div>
+          <small class="text-white-50">Cities</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH SECTION -->
+  <section class="container" style="margin-top: -70px; position: relative; z-index: 5">
+    <div class="card border-0 shadow-lg rounded-4 p-4">
+      <div class="d-flex flex-wrap gap-3 border-bottom pb-3 mb-3">
+        <button class="btn btn-sm btn-success fw-semibold px-3" type="button" routerLink="/search">
+          <i class="bi bi-bus-front me-1"></i>
+          Bus Ticket
+        </button>
+
+        <button class="btn btn-sm btn-outline-secondary px-3" disabled style="opacity: 0.6">
+          <i class="bi bi-airplane me-1"></i>
+          Flight
+        </button>
+
+        <button class="btn btn-sm btn-outline-secondary px-3" disabled style="opacity: 0.6">
+          <i class="bi bi-train-front me-1"></i>
+          Train
+        </button>
+      </div>
+
+      <form (ngSubmit)="searchBus()">
+        <div class="row g-3 align-items-end">
+          <!-- FROM -->
+          <div class="col-md-3">
+            <label class="form-label fw-semibold small mb-1" for="cmbfrom">From</label>
+            <div class="input-group">
+              <span class="input-group-text bg-success text-white">
+                <i class="bi bi-geo-alt"></i>
+              </span>
+              <select
+                id="cmbfrom"
+                class="form-select"
+                [value]="from()"
+                (change)="from.set($any($event.target).value)"
+              >
+                @for (city of cities(); track city.id) {
+                  <option [value]="city.id">{{ city.name }}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <!-- SWAP -->
+          <div class="col-md-1 d-flex justify-content-center">
+            <button
+              type="button"
+              class="btn btn-light rounded-circle border shadow-sm"
+              (click)="swapRoutes()"
+              title="Swap"
+            >
+              <i class="bi bi-arrow-left-right text-primary"></i>
+            </button>
+          </div>
+
+          <!-- TO -->
+          <div class="col-md-3">
+            <label class="form-label fw-semibold small mb-1"> To </label>
+
+            <div class="input-group">
+              <span class="input-group-text bg-danger text-white">
+                <i class="bi bi-flag"></i>
+              </span>
+
+              <select
+                class="form-select"
+                [value]="to()"
+                (change)="to.set($any($event.target).value)"
+              >
+                @for (city of cities(); track city.id) {
+                  <option [value]="city.id">
+                    {{ city.name }}
+                  </option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <!-- JOURNEY DATE -->
+          <div class="col-md-3">
+            <label class="form-label fw-semibold small mb-1"> Journey Date </label>
+
+            <div class="input-group">
+              <span class="input-group-text text-primary">
+                <i class="bi bi-calendar3"></i>
+              </span>
+
+              <input
+                type="date"
+                class="form-control"
+                [value]="date()"
+                (change)="date.set($any($event.target).value)"
+              />
+            </div>
+          </div>
+
+          <!-- SEARCH -->
+          <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-success btn-lg fw-semibold">
+              <i class="bi bi-search me-1"></i>
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="container py-5" id="features">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">Why Choose BusEase?</h2>
+
+      <p class="text-muted">A complete, safe and user-friendly way to book your journey.</p>
+    </div>
+
+    <div class="row g-4">
+      @for (feature of features(); track feature.title) {
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm lift-card p-3">
+            <div
+              class="rounded-3 d-inline-flex align-items-center justify-content-center mb-3"
+              style="width: 54px; height: 54px; background: #eef2ff"
+            >
+              <i class="bi {{ feature.icon }} fs-4 text-primary"></i>
+            </div>
+
+            <h5 class="fw-semibold">
+              {{ feature.title }}
+            </h5>
+
+            <p class="text-muted small mb-0">
+              {{ feature.text }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- POPULAR ROUTES -->
+  <section class="bg-white py-5" id="routes">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">Popular Bus Routes</h2>
+
+        <p class="text-muted">Most searched routes across the country</p>
+      </div>
+
+      <div class="row g-4">
+        @for (route of popularRoutes(); track route.to) {
+          <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm lift-card h-100" style="cursor: pointer">
+              <div class="card-body d-flex align-items-center gap-3">
+                <div
+                  class="rounded-3 d-flex align-items-center justify-content-center text-white"
+                  style="
+                    width: 52px;
+                    height: 52px;
+                    background: linear-gradient(135deg, #0d47a1, #1e88e5);
+                  "
+                >
+                  <i class="bi bi-bus-front fs-4"></i>
+                </div>
+
+                <div class="flex-grow-1">
+                  <div class="fw-semibold">{{ route.from }} → {{ route.to }}</div>
+
+                  <small class="text-muted"> {{ route.trips }} trips · {{ route.price }} </small>
+                </div>
+
+                <i class="bi bi-chevron-right text-primary"></i>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="container py-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">How It Works</h2>
+
+      <p class="text-muted">Book your bus ticket in four simple steps</p>
+    </div>
+
+    <div class="row g-4 text-center">
+      @for (step of howItWorks(); track step.n) {
+        <div class="col-6 col-lg-3">
+          <div class="position-relative">
+            <div
+              class="rounded-circle d-inline-flex align-items-center justify-content-center text-white shadow"
+              style="
+                width: 72px;
+                height: 72px;
+                background: linear-gradient(135deg, #0d47a1, #1e88e5);
+              "
+            >
+              <i class="bi {{ step.icon }} fs-3"></i>
+            </div>
+
+            <span
+              class="position-absolute top-0 translate-middle badge rounded-pill bg-warning text-dark fw-bold"
+              style="left: 55%"
+            >
+              {{ step.n }}
+            </span>
+          </div>
+
+          <h6 class="fw-semibold mt-3 mb-1">
+            {{ step.title }}
+          </h6>
+
+          <p class="text-muted small mb-0 px-2">
+            {{ step.text }}
+          </p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="bg-white py-4 border-top">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 text-muted">
+        <span class="small text-uppercase fw-semibold me-2"> Our Operator Partners: </span>
+
+        @for (partner of partners(); track partner) {
+          <span class="fw-bold" style="color: #94a3b8; font-size: 15px; letter-spacing: 0.5px">
+            {{ partner.toUpperCase() }}
+          </span>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="container py-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">What Passengers Say</h2>
+
+      <p class="text-muted">Real reviews from real travellers</p>
+    </div>
+
+    <div class="row g-4">
+      @for (testimonial of testimonials(); track testimonial.name) {
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm lift-card h-100 p-3">
+            <!-- STARS -->
+            <div class="text-warning mb-2">
+              @for (star of [1, 2, 3, 4, 5]; track star) {
+                <i class="bi bi-star-fill me-1"></i>
+              }
+            </div>
+
+            <!-- REVIEW -->
+            <p class="text-muted small mb-3">
+              <i class="bi bi-quote fs-4 text-primary me-1"></i>
+
+              {{ testimonial.text }}
+            </p>
+
+            <!-- USER -->
+            <div class="d-flex align-items-center gap-2 mt-auto">
+              <div
+                class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  background: linear-gradient(135deg, #0d47a1, #1e88e5);
+                "
+              >
+                {{ testimonial.name }}
+              </div>
+
+              <div>
+                <div class="fw-semibold small">
+                  {{ testimonial.name }}
+                </div>
+
+                <small class="text-muted">
+                  {{ testimonial.route }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="brand-gradient text-white py-5">
+    <div class="container text-center">
+      <h3 class="fw-bold">Ready to plan your next trip?</h3>
+
+      <p class="text-white-50 mb-4">Search buses and book your tickets in minutes.</p>
+
+      <button class="btn btn-warning btn-lg fw-semibold px-4" type="button">
+        <i class="bi bi-search me-1"></i>
+        Search Buses Now
+      </button>
+    </div>
+  </section>
+</div>

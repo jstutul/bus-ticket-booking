@@ -1,1 +1,201 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --brand-blue: #0d47a1;
+  --brand-green: #10b981;
+  --brand-dark: #0b2545;
+  --brand-accent: #f59e0b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  background-color: #f4f6fb;
+  margin: 0;
+  color: #1e293b;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Brand gradient for navbar / CTA */
+.brand-gradient {
+  background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1e88e5 100%);
+}
+
+/* Custom scrollbar for seat map */
+.seat-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.seat-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 8px;
+}
+.seat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Seat buttons */
+.seat-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px 8px 4px 4px;
+  border: 1px solid #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  background: #eef2ff;
+  color: #1e40af;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+.seat-btn:hover:not(:disabled) {
+  transform: scale(1.06);
+  border-color: #6366f1;
+}
+.seat-btn.available {
+  background: #eef2ff;
+  color: #1e40af;
+}
+.seat-btn.selected {
+  background: #10b981;
+  border-color: #10b981;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+}
+.seat-btn.occupied {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+.seat-btn.women {
+  background: #fce7f3;
+  color: #be185d;
+  cursor: not-allowed;
+}
+.seat-btn.unavailable {
+  visibility: hidden;
+}
+
+/* Hero banner */
+.hero-banner {
+  background: linear-gradient(120deg, #0b2545 0%, #0d47a1 55%, #1565c0 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-banner .hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+/* Hover lift cards */
+.lift-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.lift-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(13, 71, 161, 0.12) !important;
+}
+
+/* Sidebar nav (dashboards) */
+.sidebar-nav .nav-link {
+  color: #475569;
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+}
+.sidebar-nav .nav-link.active {
+  background: var(--brand-blue);
+  color: #fff !important;
+}
+.sidebar-nav .nav-link:hover:not(.active) {
+  background: #eef2ff;
+  color: var(--brand-blue);
+}
+
+.stats-card {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(13, 71, 161, 0.08);
+}
+
+/* Dashed route line on search cards */
+.border-dashed {
+  border-style: dashed !important;
+}
+
+/* Payment method selected highlight */
+.payment-method-btn {
+  position: relative;
+  border-radius: 12px;
+  min-height: 92px;
+}
+
+/* Admin chart bars */
+.chart-bar {
+  min-height: 8px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, #1e88e5, #0d47a1);
+}
+
+/* Sticky booking summary */
+.sticky-summary {
+  position: sticky;
+  top: 90px;
+}
+
+/* Responsive left border on large screens (search bus card) */
+@media (min-width: 992px) {
+  .border-start-lg {
+    border-left: 1px solid #dee2e6 !important;
+    border-top: 0 !important;
+  }
+}
+
+/* Footer social buttons */
+.footer-social {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Badge helpers that Bootstrap 5.3 supports but keep consistent */
+.bg-success-subtle {
+  background-color: #d1e7dd !important;
+}
+.bg-danger-subtle {
+  background-color: #f8d7da !important;
+}
+.bg-warning-subtle {
+  background-color: #fff3cd !important;
+}
+.bg-primary-subtle {
+  background-color: #cfe2ff !important;
+}
+.bg-secondary-subtle {
+  background-color: #e2e3e5 !important;
+}
+.text-success-emphasis {
+  color: #0a3622 !important;
+}
