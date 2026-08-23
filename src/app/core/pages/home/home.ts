@@ -5,6 +5,7 @@ import { CityDto } from '../../models/City.model';
 import {
   FormBuilder,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
@@ -12,7 +13,7 @@ import {
 @Component({
   selector: 'app-home',
   standalone:true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -65,8 +66,7 @@ export class Home {
   }
 
 
-  searchBus(): void {
-
+  searchBus() {
     // Later you can replace this with your BookingService
     console.log({
       from: this.from,
@@ -74,7 +74,7 @@ export class Home {
       date: this.date
     });
 
-    this.router.navigate(['/search']);
+    //this.router.navigate(['/search']);
   }
 
 
